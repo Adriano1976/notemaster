@@ -138,7 +138,7 @@ Este projeto está licenciado sob a Licença MIT - veja o arquivo [LICENSE](LICE
 
 **Autor:** Adriano1976
 **GitHub:** [@Adriano1976](https://github.com/Adriano1976)
-**Email:** [seu-email@exemplo.com]
+**Email:** [adrianosantos.git@gmail.com]
 
 ---
 
@@ -209,7 +209,16 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 **Author:** Adriano1976
 **GitHub:** [@Adriano1976](https://github.com/Adriano1976)
-**Email:** [your-email@example.com]
+**Email:** [adrianosantos.git@gmail.com]
+
+<br><br><br><br><br>  
+
+<div align="center">
+  <p><b><h3> Contagem de visitantes </h3></b></p>  
+  <img src="https://vbr.nathanchung.dev/badge?page_id=Adriano1976/prompt-generator-notebooklm" style="height: 30px;" />
+   <br>
+  <img width="100%" src="https://capsule-render.vercel.app/api?type=waving&color=87CEFA&height=120&section=footer"/>
+</div>
 
 ---
 

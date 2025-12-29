@@ -138,7 +138,7 @@ Este projeto está licenciado sob a Licença MIT - veja o arquivo [LICENSE](LICE
 
 **Autor:** Adriano1976
 **GitHub:** [@Adriano1976](https://github.com/Adriano1976)
-**Email:** [adrianosantos.git@gmail.com]
+**Email:** adrianosantos.git@gmail.com
 
 ---
 
@@ -209,7 +209,7 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 **Author:** Adriano1976
 **GitHub:** [@Adriano1976](https://github.com/Adriano1976)
-**Email:** [adrianosantos.git@gmail.com]
+**Email:** adrianosantos.git@gmail.com
 
 <br><br><br><br><br>  
 

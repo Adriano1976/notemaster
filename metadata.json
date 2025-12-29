@@ -1,5 +1,0 @@
-{
-  "name": "Assistente NotebookLM",
-  "description": "Uma ferramenta para gerar prompts otimizados e configurações personalizadas para o Google NotebookLM, facilitando o estudo acadêmico em diversos níveis.",
-  "requestFramePermissions": []
-}

@@ -1,8 +1,8 @@
 <img width="1348" height="730" alt="image" src="https://github.com/user-attachments/assets/da32ec38-4949-43e4-99e2-46c0615f4709" />
 
-# NoteMaster AI - Prompt Generator for NotebookLM
+# NoteMaster - Prompt Generator for NotebookLM
 
-O NoteMaster AI é um gerador de prompts avançado para o NotebookLM que ajuda a otimizar o fluxos de trabalho de pesquisa acadêmica.
+O NoteMaster é um gerador de prompts avançado e de alto performance para o NotebookLM, que ajuda a otimizar o fluxos de trabalho de pesquisa acadêmica.
 
 ---
 
@@ -17,7 +17,7 @@ O NoteMaster AI é um gerador de prompts avançado para o NotebookLM que ajuda a
 
 ### Visão Geral
 
-O **NoteMaster AI - Prompt Generator for NotebookLM** é uma ferramenta poderosa projetada para criar e gerenciar prompts personalizados otimizados para o NotebookLM nos estudos acadêmicos. Esta aplicação oferece uma interface intuitiva para gerar prompts com alta qualidade que aprimoram sua experiência de pesquisa e análise.
+O **NoteMaster - Prompt Generator for NotebookLM** é uma ferramenta poderosa projetada para criar e gerenciar prompts personalizados otimizados para o NotebookLM nos estudos acadêmicos. Esta aplicação oferece uma interface intuitiva para gerar prompts com alta qualidade que aprimoram sua experiência de pesquisa e análise.
 
 ### Características Principais
 
@@ -97,10 +97,10 @@ O arquivo `index.html` é a página principal da aplicação, contendo:
 
 ```bash
 # Clone o repositório
-git clone https://github.com/Adriano1976/notemaster.ai.git
+git clone https://github.com/Adriano1976/notemaster.git
 
 # Navegue até o diretório do projeto
-cd notemaster.ai
+cd notemaster
 
 # Abra o index.html em seu navegador
 # Ou use um servidor local:
@@ -134,7 +134,7 @@ Contribuições são bem-vindas! Para contribuir:
 
 ### Demo
 
-Confira nossa demonstração ao vivo em: [https://adriano1976.github.io/notemaster.ai/](https://adriano1976.github.io/notemaster.ai/)
+Confira nossa demonstração ao vivo em: [https://adriano1976.github.io/notemaster.ai/](https://adriano1976.github.io/notemaster/)
 
 ### Licença
 
@@ -152,7 +152,7 @@ Este projeto está licenciado sob a Licença MIT - veja o arquivo [LICENSE](LICE
 
 ### Overview
 
-The **Notemaster.ai** is a powerful tool designed to create and manage customized prompts optimized for NotebookLM. This application provides an intuitive interface for generating high-quality prompts that enhance your research and analysis experience.
+The **Notemaster** is a powerful tool designed to create and manage customized prompts optimized for NotebookLM. This application provides an intuitive interface for generating high-quality prompts that enhance your research and analysis experience.
 
 ### Key Features
 
@@ -172,10 +172,10 @@ The **Notemaster.ai** is a powerful tool designed to create and manage customize
 
 ```bash
 # Clone the repository
-git clone https://github.com/Adriano1976/notemaster.ai.git
+git clone https://github.com/Adriano1976/notemaster.git
 
 # Navigate to the project directory
-cd motemaster.ai
+cd motemaster
 
 # Open index.html in your browser
 # Or use a local server:

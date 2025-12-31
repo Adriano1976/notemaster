@@ -1,4 +1,6 @@
-# Prompt Generator for NotebookLM (NoteMaster AI)
+<img width="1348" height="730" alt="image" src="https://github.com/user-attachments/assets/da32ec38-4949-43e4-99e2-46c0615f4709" />
+
+# NoteMaster AI - Prompt Generator for NotebookLM
 
 O NoteMaster AI é um gerador de prompts avançado para o NotebookLM que ajuda a otimizar o fluxos de trabalho de pesquisa acadêmica.
 

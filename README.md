@@ -1,6 +1,6 @@
-# Prompt Generator for NotebookLM
+# Prompt Generator for NotebookLM (NoteMaster AI)
 
-Um gerador de prompts avançado para o NotebookLM que ajuda a otimizar seus fluxos de trabalho de pesquisa.
+O NoteMaster AI é um gerador de prompts avançado para o NotebookLM que ajuda a otimizar o fluxos de trabalho de pesquisa acadêmica.
 
 ---
 
@@ -15,7 +15,7 @@ Um gerador de prompts avançado para o NotebookLM que ajuda a otimizar seus flux
 
 ### Visão Geral
 
-O **Prompt Generator for NotebookLM** é uma ferramenta poderosa projetada para criar e gerenciar prompts personalizados otimizados para o NotebookLM. Esta aplicação oferece uma interface intuitiva para gerar prompts com alta qualidade que aprimoram sua experiência de pesquisa e análise.
+O **NoteMaster AI - Prompt Generator for NotebookLM** é uma ferramenta poderosa projetada para criar e gerenciar prompts personalizados otimizados para o NotebookLM nos estudos acadêmicos. Esta aplicação oferece uma interface intuitiva para gerar prompts com alta qualidade que aprimoram sua experiência de pesquisa e análise.
 
 ### Características Principais
 
@@ -95,10 +95,10 @@ O arquivo `index.html` é a página principal da aplicação, contendo:
 
 ```bash
 # Clone o repositório
-git clone https://github.com/Adriano1976/prompt-generator-notebooklm.git
+git clone https://github.com/Adriano1976/notemaster.ai.git
 
 # Navegue até o diretório do projeto
-cd prompt-generator-notebooklm
+cd notemaster.ai
 
 # Abra o index.html em seu navegador
 # Ou use um servidor local:
@@ -146,7 +146,7 @@ Este projeto está licenciado sob a Licença MIT - veja o arquivo [LICENSE](LICE
 
 ### Overview
 
-The **Prompt Generator for NotebookLM** is a powerful tool designed to create and manage customized prompts optimized for NotebookLM. This application provides an intuitive interface for generating high-quality prompts that enhance your research and analysis experience.
+The **Notemaster.ai** is a powerful tool designed to create and manage customized prompts optimized for NotebookLM. This application provides an intuitive interface for generating high-quality prompts that enhance your research and analysis experience.
 
 ### Key Features
 
@@ -166,10 +166,10 @@ The **Prompt Generator for NotebookLM** is a powerful tool designed to create an
 
 ```bash
 # Clone the repository
-git clone https://github.com/Adriano1976/prompt-generator-notebooklm.git
+git clone https://github.com/Adriano1976/notemaster.ai.git
 
 # Navigate to the project directory
-cd prompt-generator-notebooklm
+cd motemaster.ai
 
 # Open index.html in your browser
 # Or use a local server:

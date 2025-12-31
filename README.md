@@ -1,4 +1,4 @@
-<img width="1348" height="730" alt="image" src="https://github.com/user-attachments/assets/da32ec38-4949-43e4-99e2-46c0615f4709" />
+<img width="1366" height="768" alt="image" src="https://github.com/user-attachments/assets/3bb5b309-d8c3-456d-998c-2c2fb607e67e" />
 
 # NoteMaster - Prompt Generator for NotebookLM
 

@@ -1,590 +1,700 @@
 
 <!DOCTYPE html>
 <html lang="pt-br">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>NoteMaster - Guia de Alta Peformance</title>
-	<!-- Favicon -->
-    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%233b82f6' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M22 10v6M2 10l10-5 10 5-10 5z'%3E%3C/path%3E%3Cpath d='M6 12v5c3 3 9 3 12 0v-5'%3E%3C/path%3E%3C/svg%3E">
-    <!-- Tailwind CSS CDN -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Lucide Icons -->
-    <script src="https://unpkg.com/lucide@latest"></script>
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
-        body {
-            font-family: 'Inter', sans-serif;
-        }
-        .step-transition {
-            transition: all 0.3s ease-in-out;
-        }
-        .scale-102 {
-            transform: scale(1.02);
-        }
-        .hidden {
-            display: none;
-        }
-        pre {
-            scrollbar-width: thin;
-            scrollbar-color: #cbd5e1 transparent;
-        }
-    </style>
-<link rel="stylesheet" href="/index.css">
-</head>
-<body class="min-h-screen bg-gradient-to-br from-blue-100 via-white to-yellow-100 antialiased">
-
-    <!-- Main Container -->
-    <div id="app-container" class="p-6 pb-32">
-        <div class="max-w-3xl mx-auto">
-            
+   <head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <title>NoteMaster</title>
+      <!-- Favicon -->
+      <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%233b82f6' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M22 10v6M2 10l10-5 10 5-10 5z'%3E%3C/path%3E%3Cpath d='M6 12v5c3 3 9 3 12 0v-5'%3E%3C/path%3E%3C/svg%3E">
+      <!-- Tailwind CSS CDN -->
+      <script src="https://cdn.tailwindcss.com"></script>
+      <!-- Lucide Icons -->
+      <script src="https://unpkg.com/lucide@latest"></script>
+      <style>
+         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+         body {
+         font-family: 'Inter', sans-serif;
+         }
+         .step-transition {
+         transition: all 0.3s ease-in-out;
+         }
+         .scale-102 {
+         transform: scale(1.02);
+         }
+         .hidden {
+         display: none;
+         }
+         pre {
+         scrollbar-width: thin;
+         scrollbar-color: #cbd5e1 transparent;
+         }
+         @keyframes spin {
+         to { transform: rotate(360deg); }
+         }
+         .animate-spin {
+         animation: spin 1s linear infinite;
+         }
+      </style>
+   </head>
+   <body class="min-h-screen bg-gradient-to-br from-blue-100 via-white to-yellow-100 antialiased">
+      <!-- Main Container -->
+      <div id="app-container" class="p-6 pb-32">
+         <div class="max-w-3xl mx-auto">
             <!-- Main Card (Step Wizard) -->
             <div id="wizard-card" class="bg-white rounded-2xl shadow-2xl p-8 border-t-8 border-blue-500">
-                
-                <!-- Header -->
-                <div class="flex items-center gap-4 mb-6">
-                    <div class="bg-gradient-to-br from-blue-500 to-blue-600 p-4 rounded-2xl shadow-lg">
-                        <i data-lucide="graduation-cap" class="text-white w-9 h-9"></i>
-                    </div>
-                    <div>
-                        <h1 class="text-3xl font-bold text-gray-900">NoteMaster</h1>
-                        <p class="text-base text-gray-600 font-medium">O seu guia de alta performance para o NotebookLM</p>
-                        <p class="text-xs text-gray-400 mt-1 font-semibold">v1.0</p>
-                    </div>
-                </div>
-
-                <!-- Progress Bar -->
-                <div class="mb-8">
-                    <div class="flex items-center justify-between mb-2 gap-1" id="progress-container">
-                        <div class="h-3 flex-1 rounded-full transition-all bg-blue-500" data-step-idx="0"></div>
-                        <div class="h-3 flex-1 rounded-full transition-all bg-gray-200" data-step-idx="1"></div>
-                        <div class="h-3 flex-1 rounded-full transition-all bg-gray-200" data-step-idx="2"></div>
-                        <div class="h-3 flex-1 rounded-full transition-all bg-gray-200" data-step-idx="3"></div>
-                        <div class="h-3 flex-1 rounded-full transition-all bg-gray-200" data-step-idx="4"></div>
-                    </div>
-                    <p id="step-counter" class="text-xs text-gray-500 text-center font-semibold">
-                        Etapa 1 de 5
-                    </p>
-                </div>
-
-                <!-- Steps Content Area -->
-                <div id="steps-content" class="space-y-6">
-                    
-                    <!-- Step 0: Welcome -->
-                    <div id="step-0" class="step-view space-y-4">
-                        <div class="flex items-start gap-4 bg-gradient-to-r from-blue-50 to-blue-100 p-6 rounded-2xl border-2 border-blue-300">
-                            <i data-lucide="book-open" class="text-blue-600 mt-1 flex-shrink-0 w-7 h-7"></i>
-                            <div>
-                                <h2 class="text-xl font-bold text-gray-900 mb-3">
-                                    Bem-vindo ao NoteMaster! 👋
-                                </h2>
-                                <p class="text-gray-700 leading-relaxed">
-                                    Olá! Sou o NoteMaster e vou guiar você na configuração personalizada do NotebookLM para elevar o nível do seu aprendizado. Por meio de breves perguntas, gerarei um guia exclusivo e um prompt de alta performance, garantindo que você utilize todo o poder da IA nos seus estudos.
-                                </p>
-                            </div>
+               <!-- Header -->
+               <div class="flex items-center gap-4 mb-6">
+                  <div class="bg-gradient-to-br from-blue-500 to-blue-600 p-4 rounded-2xl shadow-lg">
+                     <i data-lucide="graduation-cap" class="text-white w-9 h-9"></i>
+                  </div>
+                  <div>
+                     <h1 class="text-3xl font-bold text-gray-900">NoteMaster</h1>
+                     <p class="text-base text-gray-600 font-medium">O seu guia de alta performance para o NotebookLM</p>
+                     <p class="text-xs text-gray-400 mt-1 font-semibold">v2.0</p>
+                  </div>
+               </div>
+               <!-- Progress Bar -->
+               <div class="mb-8">
+                  <div class="flex items-center justify-between mb-2 gap-1" id="progress-container">
+                     <div class="h-3 flex-1 rounded-full transition-all bg-blue-500" data-step-idx="0"></div>
+                     <div class="h-3 flex-1 rounded-full transition-all bg-gray-200" data-step-idx="1"></div>
+                     <div class="h-3 flex-1 rounded-full transition-all bg-gray-200" data-step-idx="2"></div>
+                     <div class="h-3 flex-1 rounded-full transition-all bg-gray-200" data-step-idx="3"></div>
+                     <div class="h-3 flex-1 rounded-full transition-all bg-gray-200" data-step-idx="4"></div>
+                  </div>
+                  <p id="step-counter" class="text-xs text-gray-500 text-center font-semibold">
+                     Etapa 1 de 5
+                  </p>
+               </div>
+               <!-- Steps Content Area -->
+               <div id="steps-content" class="space-y-6">
+                  <!-- Step 0: Welcome -->
+                  <div id="step-0" class="step-view space-y-4">
+                     <div class="flex items-start gap-4 bg-gradient-to-r from-blue-50 to-blue-100 p-6 rounded-2xl border-2 border-blue-300">
+                        <i data-lucide="book-open" class="text-blue-600 mt-1 flex-shrink-0 w-7 h-7"></i>
+                        <div>
+                           <h2 class="text-xl font-bold text-gray-900 mb-3">
+                              Bem-vindo ao NoteMaster! 👋
+                           </h2>
+                           <p class="text-gray-700 leading-relaxed">
+                              Olá! Sou o NoteMaster AI e vou guiar você na configuração personalizada do NotebookLM para elevar o nível do seu aprendizado. Por meio de breves perguntas, gerarei um guia exclusivo e um prompt de alta performance, garantindo que você utilize todo o poder da IA nos seus estudos.
+                           </p>
                         </div>
-                        <p class="text-center text-gray-700 font-bold text-lg">
-                            Vamos começar! Clique em "Continuar" para iniciar.
-                        </p>
-                    </div>
-
-                    <!-- Step 1: Nível -->
-                    <div id="step-1" class="step-view space-y-4 hidden">
-                        <h2 class="text-2xl font-bold text-gray-900">Qual é o seu nível de instrução?</h2>
-                        <div class="grid grid-cols-1 gap-3" id="nivel-options">
-                            <!-- JS will inject options here -->
-                        </div>
-                    </div>
-
-                    <!-- Step 2: Curso -->
-                    <div id="step-2" class="step-view space-y-4 hidden">
-                        <h2 class="text-2xl font-bold text-gray-900">Qual é o seu curso?</h2>
-                        <p class="text-base text-gray-600 font-medium">Informe o nome completo do seu curso (ex: Engenharia da Computação, Administração, Medicina, etc.)</p>
-                        <input type="text" id="input-curso" placeholder="Digite o nome do seu curso..." class="w-full p-5 border-2 border-gray-700 rounded-xl focus:border-blue-500 focus:outline-none bg-gray-800 text-white placeholder-gray-400 font-medium shadow-sm text-lg">
-                    </div>
-
-                    <!-- Step 3: Tema -->
-                    <div id="step-3" class="step-view space-y-4 hidden">
-                        <h2 class="text-2xl font-bold text-gray-900">Qual tema/disciplina você vai abordar?</h2>
-                        <p class="text-base text-gray-600 font-medium">Seja específico (ex: Aprendizado de Máquina, Contabilidade Gerencial, Anatomia Humana, etc.)</p>
-                        <input type="text" id="input-tema" placeholder="Digite o tema ou disciplina..." class="w-full p-5 border-2 border-gray-700 rounded-xl focus:border-blue-500 focus:outline-none bg-gray-800 text-white placeholder-gray-400 font-medium shadow-sm text-lg">
-                    </div>
-
-                    <!-- Step 4: Recurso -->
-                    <div id="step-4" class="step-view space-y-4 hidden">
-                        <h2 class="text-2xl font-bold text-gray-900">Qual recurso do NotebookLM você vai utilizar?</h2>
-                        <div class="grid grid-cols-1 gap-3" id="recurso-options">
-                            <!-- JS will inject options here -->
-                        </div>
-                    </div>
-
-                </div>
-
-                <!-- Footer Buttons -->
-                <div class="mt-8 flex gap-3">
-                    <button id="btn-back" class="hidden flex-1 bg-gray-200 text-gray-700 py-4 px-6 rounded-xl hover:bg-gray-300 transition-all font-bold shadow-md text-lg">
-                        ← Voltar
-                    </button>
-                    <button id="btn-next" class="flex-1 py-4 px-6 rounded-xl font-bold transition-all flex items-center justify-center gap-2 shadow-md text-lg bg-gradient-to-r from-blue-500 to-blue-600 text-white hover:from-blue-600 hover:to-blue-700">
-                        <span id="next-label">Continuar</span>
-                        <i data-lucide="arrow-right" class="w-6 h-6"></i>
-                    </button>
-                </div>
+                     </div>
+                     <p class="text-center text-gray-700 font-bold text-lg">
+                        Vamos começar! Clique em "Continuar" para iniciar.
+                     </p>
+                  </div>
+                  <!-- Step 1: Nível -->
+                  <div id="step-1" class="step-view space-y-4 hidden">
+                     <h2 class="text-2xl font-bold text-gray-900">Qual é o seu nível de instrução?</h2>
+                     <div class="grid grid-cols-1 md:grid-cols-2 gap-4" id="nivel-options">
+                        <!-- JS will inject options here -->
+                     </div>
+                  </div>
+                  <!-- Step 2: Curso -->
+                  <div id="step-2" class="step-view space-y-4 hidden">
+                     <h2 class="text-2xl font-bold text-gray-900">Qual é o seu curso?</h2>
+                     <p class="text-base text-gray-600 font-medium">Informe o nome completo do seu curso (ex: Engenharia da Computação, Administração, Medicina, etc.)</p>
+                     <input type="text" id="input-curso" placeholder="Digite o nome do seu curso..." class="w-full p-5 border-2 border-gray-700 rounded-xl focus:border-blue-500 focus:outline-none bg-gray-800 text-white placeholder-gray-400 font-medium shadow-sm text-lg">
+                  </div>
+                  <!-- Step 3: Tema -->
+                  <div id="step-3" class="step-view space-y-4 hidden">
+                     <h2 class="text-2xl font-bold text-gray-900">Qual tema/disciplina você vai abordar?</h2>
+                     <p class="text-base text-gray-600 font-medium">Seja específico (ex: Aprendizado de Máquina, Contabilidade Gerencial, Anatomia Humana, etc.)</p>
+                     <input type="text" id="input-tema" placeholder="Digite o tema ou disciplina..." class="w-full p-5 border-2 border-gray-700 rounded-xl focus:border-blue-500 focus:outline-none bg-gray-800 text-white placeholder-gray-400 font-medium shadow-sm text-lg">
+                  </div>
+                  <!-- Step 4: Recurso -->
+                  <div id="step-4" class="step-view space-y-4 hidden">
+                     <h2 class="text-2xl font-bold text-gray-900">Qual recurso do NotebookLM você vai utilizar?</h2>
+                     <div class="grid grid-cols-1 md:grid-cols-2 gap-4" id="recurso-options">
+                        <!-- JS will inject options here -->
+                     </div>
+                  </div>
+               </div>
+               <!-- Footer Buttons -->
+               <div class="mt-8 flex gap-3">
+                  <button id="btn-back" class="hidden flex-1 bg-gray-200 text-gray-700 py-4 px-6 rounded-xl hover:bg-gray-300 transition-all font-bold shadow-md text-lg">
+                  ← Voltar
+                  </button>
+                  <button id="btn-next" class="flex-1 py-4 px-6 rounded-xl font-bold transition-all flex items-center justify-center gap-2 shadow-md text-lg bg-gradient-to-r from-blue-500 to-blue-600 text-white hover:from-blue-600 hover:to-blue-700">
+                  <span id="next-label">Continuar</span>
+                  <i data-lucide="arrow-right" class="w-6 h-6"></i>
+                  </button>
+               </div>
             </div>
-
             <!-- Result View (Initially hidden) -->
             <div id="result-view" class="max-w-4xl mx-auto space-y-6 hidden">
-                <!-- Data injection here via renderResult() -->
+               <!-- Data injection here via renderResult() -->
             </div>
-            
             <footer class="mt-8 text-center text-gray-600">
-                <p class="text-sm mb-1">Criado por Adriano Santos e desenvolvido com IA para maximizar sua produtividade acadêmica.</p>
-                <p class="text-xs text-gray-500">© 2025 NoteMaster • Assistente de Prompt Engineering</p>
+               <p class="text-sm mb-1">Criado por Adriano Santos e desenvolvido com IA para maximizar sua produtividade acadêmica.</p>
+               <p class="text-xs text-gray-500">© 2025 NoteMaster • Assistente de Prompt Engineering</p>
             </footer>
-        </div>
-    </div>
-
-    <!-- JavaScript Logic -->
-    <script>
-        // Constants
-        const NIVEIS = [
-            'Ensino Fundamental',
-            'Ensino Médio',
-            'Técnico',
-            'Graduação',
-            'Especialização',
-            'Mestrado ou Doutorado'
-        ];
-
-        const RECURSOS = [
-            'Resumo em Áudio - Gere um podcast com IA baseado nas suas fontes',
-            'Resumo em Vídeo - Gere um vídeo explicativo, apresentado por IA',
-            'Cartões didáticos - Gere cartões didáticos com IA baseados nas suas fontes',
-            'Teste - Gere um teste interativo com IA baseado nas suas fontes',
-            'Infográfico - Gere um infográfico didático com IA baseado nas suas fontes',
-            'Apresentação de slides - Gere uma apresentação com IA baseada nas suas fontes',
-            'Relatório - Gere relatórios personalizados especificando a estrutura, o estilo, o tom e muito mais',
-            'Configuração das conversas - Gere uma configuração das conversas personalizadas, especificando o estilo e o tom da conversa com IA baseado nas suas fontes'
-        ];
-
-        const NIVEL_CONFIG = {
-            'Ensino Fundamental': {
-                complexidade: 'elementar',
-                linguagem: 'simples e objetiva',
-                detalhamento: 'conceitos básicos com muitos exemplos visuais'
-            },
-            'Ensino Médio': {
-                complexidade: 'básica',
-                linguagem: 'acessível e clara',
-                detalhamento: 'conceitos fundamentais com exemplos práticos'
-            },
-            'Técnico': {
-                complexidade: 'intermediária',
-                linguagem: 'técnica mas didática',
-                detalhamento: 'aplicações práticas e procedimentos'
-            },
-            'Graduação': {
-                complexidade: 'acadêmica',
-                linguagem: 'formal e técnica',
-                detalhamento: 'teoria fundamentada e análise crítica'
-            },
-            'Especialização': {
-                complexidade: 'avançada',
-                linguagem: 'especializada',
-                detalhamento: 'aprofundamento em áreas específicas'
-            },
-            'Mestrado ou Doutorado': {
-                complexidade: 'científica avançada',
-                linguagem: 'acadêmica especializada',
-                detalhamento: 'pesquisa de ponta e metodologia rigorosa'
-            }
-        };
-
-        // State
-        let currentStep = 0;
-        let responses = {
-            nivel: '',
-            curso: '',
-            tema: '',
-            recurso: ''
-        };
-
-        // DOM Elements
-        const wizardCard = document.getElementById('wizard-card');
-        const resultView = document.getElementById('result-view');
-        const btnNext = document.getElementById('btn-next');
-        const btnBack = document.getElementById('btn-back');
-        const nextLabel = document.getElementById('next-label');
-        const stepCounter = document.getElementById('step-counter');
-        const progressBars = document.querySelectorAll('#progress-container div');
-        const inputCurso = document.getElementById('input-curso');
-        const inputTema = document.getElementById('input-tema');
-
-        // Initialize Lucide Icons
-        function initIcons() {
-            lucide.createIcons();
-        }
-
-        // State Management Functions
-        function updateUI() {
-            // Hide all steps
-            document.querySelectorAll('.step-view').forEach(s => s.classList.add('hidden'));
-            // Show current step
-            document.getElementById(`step-${currentStep}`).classList.remove('hidden');
-
-            // Update Progress Bar
-            const colors = ['bg-blue-500', 'bg-red-500', 'bg-yellow-500', 'bg-green-500', 'bg-purple-500'];
-            progressBars.forEach((bar, idx) => {
-                bar.classList.remove('bg-gray-200', ...colors);
-                if (idx <= currentStep) {
-                    bar.classList.add(colors[idx]);
-                } else {
-                    bar.classList.add('bg-gray-200');
-                }
-            });
-
-            stepCounter.innerText = `Etapa ${currentStep + 1} de 5`;
-
-            // Button visibility
-            if (currentStep > 0) {
-                btnBack.classList.remove('hidden');
-            } else {
-                btnBack.classList.add('hidden');
-            }
-
-            nextLabel.innerText = currentStep === 4 ? 'Gerar Configuração' : 'Continuar';
-
-            validateStep();
-            initIcons();
-        }
-
-        function validateStep() {
-            let isValid = false;
-            switch(currentStep) {
-                case 0: isValid = true; break;
-                case 1: isValid = responses.nivel !== ''; break;
-                case 2: isValid = responses.curso.trim().length > 0; break;
-                case 3: isValid = responses.tema.trim().length > 0; break;
-                case 4: isValid = responses.recurso !== ''; break;
-            }
-
-            if (isValid) {
-                btnNext.disabled = false;
-                btnNext.classList.remove('bg-gray-300', 'text-gray-500', 'cursor-not-allowed');
-                btnNext.classList.add('bg-gradient-to-r', 'from-blue-500', 'to-blue-600', 'text-white');
-            } else {
-                btnNext.disabled = true;
-                btnNext.classList.add('bg-gray-300', 'text-gray-500', 'cursor-not-allowed');
-                btnNext.classList.remove('bg-gradient-to-r', 'from-blue-500', 'to-blue-600', 'text-white');
-            }
-        }
-
-        function selectNivel(val) {
-            responses.nivel = val;
-            renderNivelOptions();
-            validateStep();
-        }
-
-        function selectRecurso(val) {
-            responses.recurso = val;
-            renderRecursoOptions();
-            validateStep();
-        }
-
-        function renderNivelOptions() {
-            const container = document.getElementById('nivel-options');
-            container.innerHTML = NIVEIS.map((nivel, index) => {
-                const isActive = responses.nivel === nivel;
-                return `
-                    <button onclick="selectNivel('${nivel}')" class="p-5 rounded-xl border-2 text-left transition-all duration-300 font-medium shadow-sm ${
-                        isActive 
-                        ? 'border-blue-500 bg-blue-50 shadow-md scale-105' 
-                        : 'border-gray-200 hover:border-blue-400 hover:shadow-lg hover:bg-blue-50'
-                    }">
-                        <div class="flex items-center justify-between">
-                            <span class="font-bold text-gray-900 text-lg">${index + 1}. ${nivel}</span>
-                            ${isActive ? '<i data-lucide="check-circle" class="text-blue-500 w-6 h-6"></i>' : ''}
-                        </div>
-                    </button>
-                `;
-            }).join('');
-            initIcons();
-        }
-
-        function renderRecursoOptions() {
-            const container = document.getElementById('recurso-options');
-            container.innerHTML = RECURSOS.map((recurso, index) => {
-                const isActive = responses.recurso === index.toString();
-                const [title, desc] = recurso.split(' - ');
-                return `
-                    <button onclick="selectRecurso('${index}')" class="p-5 rounded-xl border-2 text-left transition-all duration-300 shadow-sm ${
-                        isActive 
-                        ? 'border-green-500 bg-green-50 shadow-md scale-105' 
-                        : 'border-gray-200 hover:border-green-400 hover:shadow-lg hover:bg-green-50'
-                    }">
-                        <div class="flex items-center justify-between">
-                            <div>
-                                <span class="font-bold text-gray-900 block text-lg">${index + 1}. ${title}</span>
-                                <span class="text-sm text-gray-600 font-medium">${desc}</span>
-                            </div>
-                            ${isActive ? '<i data-lucide="check-circle" class="text-green-500 flex-shrink-0 w-6 h-6"></i>' : ''}
-                        </div>
-                    </button>
-                `;
-            }).join('');
-            initIcons();
-        }
-
-        function generatePrompt() {
-            const config = NIVEL_CONFIG[responses.nivel];
-            const recursoMap = ['podcast (áudio)', 'vídeo explicativo', 'cartões didáticos', 'teste interativo', 'infográfico', 'apresentação de slides', 'relatório', 'conversa interativa'];
-            const recursoSelecionado = recursoMap[parseInt(responses.recurso)];
-
-            return `Atue como um tutor acadêmico para um estudante de ${responses.curso}. Analise as fontes fornecidas sob a perspectiva da Inteligência Artificial, focando em ${responses.curso} e aplicações práticas.
-
-CONTEXTO DO ESTUDANTE:
-- Nível de instrução: ${responses.nivel}
-- Curso: ${responses.curso}
-- Tema/Disciplina: ${responses.tema}
-- Recurso solicitado: ${recursoSelecionado}
-
-DIRETRIZES DE LINGUAGEM E COMPLEXIDADE:
-- Complexidade: ${config.complexidade}
-- Linguagem: ${config.linguagem}
-- Detalhamento: ${config.detalhamento}
-
-INSTRUÇÕES PARA GERAÇÃO DE CONTEÚDO:
-
-1. Analise profundamente todas as fontes fornecidas, identificando:
-   - Conceitos-chave e terminologia específica
-   - Relações entre diferentes tópicos
-   - Exemplos práticos e casos de uso
-   - Dados, estatísticas e evidências relevantes
-
-2. Estruture o conteúdo considerando:
-   - Progressão lógica do mais simples ao mais complexo
-   - Conexões entre teoria e prática
-   - Aplicabilidade ao contexto de ${responses.tema}
-
-3. Para o formato de ${recursoSelecionado}, utilize:
-   - Identifique dados e relações visuais nas fontes
-   - Sugira gráficos, diagramas e ícones apropriados
-   - Organize informações em hierarquia visual
-   - Use cores e elementos gráficos para categorização
-
-4. Adapte a profundidade do conteúdo para:
-   - Foque em conhecimento especializado
-   - Relacione com tendências atuais da área
-   - Inclua debates e controvérsias do campo
-   - Conecte teoria avançada com prática profissional
-
-5. Incorpore elementos pedagógicos:
-   - Explicações claras de termos técnicos
-   - Exemplos contextualizados ao ${responses.tema}
-   - Conexões com aplicações reais em ${responses.tema}
-   - Perguntas reflexivas para consolidação do aprendizado
-
-OBJETIVO FINAL:
-Criar um ${recursoSelecionado} que maximize o aprendizado do estudante de ${responses.nivel} em ${responses.curso}, utilizando as fontes de forma abrangente e estruturada.`;
-        }
-
-        function renderResult() {
-            const prompt = generatePrompt();
-            const recursoNome = RECURSOS[parseInt(responses.recurso)].split(' - ')[0];
-            const isChat = parseInt(responses.recurso) === 7;
-
-            resultView.innerHTML = `
-                <!-- Selection Summary -->
-                <div class="bg-white p-6 rounded-2xl border-2 border-blue-500 shadow-lg">
-                    <h3 class="text-xl font-bold text-gray-900 mb-4 flex items-center gap-3">
-                        <i data-lucide="check-circle" class="text-green-500 w-7 h-7"></i>
-                        Configuração Personalizada
-                    </h3>
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm">
-                        <div class="bg-blue-50 p-4 rounded-xl">
-                            <p class="font-bold text-blue-600 mb-1">Nível:</p>
-                            <p class="text-gray-800">${responses.nivel}</p>
-                        </div>
-                        <div class="bg-red-50 p-4 rounded-xl">
-                            <p class="font-bold text-red-600 mb-1">Curso:</p>
-                            <p class="text-gray-800">${responses.curso}</p>
-                        </div>
-                        <div class="bg-yellow-50 p-4 rounded-xl">
-                            <p class="font-bold text-yellow-600 mb-1">Tema/Disciplina:</p>
-                            <p class="text-gray-800">${responses.tema}</p>
-                        </div>
-                        <div class="bg-green-50 p-4 rounded-xl">
-                            <p class="font-bold text-green-600 mb-1">Recurso:</p>
-                            <p class="text-gray-800">${recursoNome}</p>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Config Instructions -->
-                <div class="bg-white p-6 rounded-2xl border-2 border-blue-500 shadow-lg">
-                    <h3 class="text-lg font-bold text-gray-900 mb-4 flex items-center gap-3">
-                        <i data-lucide="sparkles" class="text-yellow-500 w-6 h-6"></i>
-                        Instruções de Configuração
-                    </h3>
-                    <div class="space-y-4 text-sm text-gray-700">
-                        <div class="bg-blue-50 p-4 rounded-xl border-l-4 border-blue-500">
-                            <p class="font-bold text-blue-600 mb-2">Passo 1: Prepare suas fontes</p>
-                            <ul class="list-disc list-inside space-y-1 ml-2">
-                                <li>Acesse o NotebookLM em notebooklm.google.com</li>
-                                <li>Crie um novo notebook ou abra um existente</li>
-                                <li>Adicione suas fontes (PDFs, documentos, URLs, vídeos do YouTube)</li>
-                                <li>Aguarde o processamento das fontes pela IA</li>
-                            </ul>
-                        </div>
-
-                        <div class="bg-green-50 p-4 rounded-xl border-l-4 border-green-500">
-                            <p class="font-bold text-green-600 mb-2">Passo 2: Configure o recurso</p>
-                            <ul class="list-disc list-inside space-y-1 ml-2">
-                                ${isChat ? `
-                                    <li>Abra a área de "Chat" no NotebookLM</li>
-                                    <li>Cole o prompt personalizado gerado abaixo</li>
-                                    <li>Inicie a conversa com suas dúvidas específicas</li>
-                                ` : `
-                                    <li>Localize o botão "${recursoNome}" no painel de recursos</li>
-                                    <li>Clique para gerar o conteúdo automaticamente</li>
-                                    <li>Aguarde o processamento (pode levar alguns minutos)</li>
-                                    <li>Revise e personalize o conteúdo gerado conforme necessário</li>
-                                `}
-                            </ul>
-                        </div>
-
-                        <div class="bg-yellow-50 p-4 rounded-xl border-l-4 border-yellow-500">
-                            <p class="font-bold text-yellow-600 mb-2">Passo 3: Otimize o resultado</p>
-                            <ul class="list-disc list-inside space-y-1 ml-2">
-                                <li>Use o prompt personalizado abaixo para guiar a IA</li>
-                                <li>Refine as fontes adicionando materiais mais específicos se necessário</li>
-                                <li>Experimente diferentes configurações para encontrar o melhor resultado</li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Prompt Output -->
-                <div class="bg-white p-6 rounded-2xl border-2 border-red-500 shadow-lg">
-                    <h3 class="text-lg font-bold text-gray-900 mb-4 flex items-center gap-3">
-                        <i data-lucide="sparkles" class="text-red-500 w-6 h-6"></i>
-                        Prompt Otimizado para NotebookLM
-                    </h3>
-                    <div class="bg-gray-50 p-4 rounded-xl border-2 border-gray-300 mb-4">
-                        <pre id="prompt-text" class="text-xs whitespace-pre-wrap font-mono text-gray-800 overflow-x-auto h-64">${prompt}</pre>
-                    </div>
-                    <button id="btn-copy" onclick="copyPrompt()" class="w-full py-3 px-6 rounded-xl font-bold text-white transition-all shadow-md text-base bg-blue-500 hover:bg-blue-600">
-                        <span id="copy-text">📋 Copiar Prompt</span>
-                    </button>
-                </div>
-
-                <!-- Tips -->
-                <div class="bg-yellow-50 p-5 rounded-2xl border-2 border-yellow-400">
-                    <h4 class="font-bold text-yellow-700 mb-3 text-base flex items-center gap-2">
-                        💡 Dicas Avançadas
-                    </h4>
-                    <ul class="text-sm text-gray-700 space-y-2 list-disc list-inside">
-                        <li>Adicione múltiplas fontes complementares para enriquecer o conteúdo gerado</li>
-                        <li>Use a função "Fazer pergunta" para esclarecer conceitos específicos</li>
-                        <li>Combine diferentes recursos (ex: áudio + slides) para estudo multimodal</li>
-                        <li>Revise e valide as informações geradas consultando suas fontes originais</li>
-                    </ul>
-                </div>
-
-                <!-- Result Actions -->
-                <div class="flex gap-3">
-                    <button onclick="changeRecurso()" class="flex-1 bg-blue-500 text-white py-3 px-6 rounded-xl hover:bg-blue-600 transition-all font-bold shadow-md">
-                        ← Alterar Recurso
-                    </button>
-                    <button onclick="resetApp()" class="flex-1 bg-red-500 text-white py-3 px-6 rounded-xl hover:bg-red-600 transition-all font-bold shadow-md">
-                        🔄 Reiniciar
-                    </button>
-                </div>
-            `;
-            initIcons();
-        }
-
-        // Action Functions
-        function handleNext() {
-            if (currentStep < 4) {
-                currentStep++;
-                updateUI();
-            } else {
-                showConfig();
-            }
-        }
-
-        function handleBack() {
-            if (currentStep > 0) {
-                currentStep--;
-                updateUI();
-            }
-        }
-
-        function showConfig() {
-            wizardCard.classList.add('hidden');
-            resultView.classList.remove('hidden');
-            renderResult();
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-        }
-
-        function changeRecurso() {
-            currentStep = 4;
-            wizardCard.classList.remove('hidden');
-            resultView.classList.add('hidden');
-            updateUI();
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-        }
-
-        function resetApp() {
-            currentStep = 0;
-            responses = { nivel: '', curso: '', tema: '', recurso: '' };
-            inputCurso.value = '';
-            inputTema.value = '';
-            wizardCard.classList.remove('hidden');
-            resultView.classList.add('hidden');
-            renderNivelOptions();
-            renderRecursoOptions();
-            updateUI();
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-        }
-
-        function copyPrompt() {
-            const text = document.getElementById('prompt-text').innerText;
-            navigator.clipboard.writeText(text).then(() => {
-                const btn = document.getElementById('btn-copy');
-                const label = document.getElementById('copy-text');
-                btn.classList.replace('bg-blue-500', 'bg-green-500');
-                btn.classList.replace('hover:bg-blue-600', 'hover:bg-green-600');
-                label.innerText = '✓ Prompt Copiado!';
-                setTimeout(() => {
-                    btn.classList.replace('bg-green-500', 'bg-blue-500');
-                    btn.classList.replace('hover:bg-green-600', 'hover:bg-blue-600');
-                    label.innerText = '📋 Copiar Prompt';
-                }, 3000);
-            });
-        }
-
-        // Event Listeners
-        btnNext.addEventListener('click', handleNext);
-        btnBack.addEventListener('click', handleBack);
-        
-        inputCurso.addEventListener('input', (e) => {
-            responses.curso = e.target.value;
-            validateStep();
-        });
-
-        inputTema.addEventListener('input', (e) => {
-            responses.tema = e.target.value;
-            validateStep();
-        });
-
-        // Initialize App
-        renderNivelOptions();
-        renderRecursoOptions();
-        updateUI();
-
-    </script>
-<script type="module" src="/index.tsx"></script>
-</body>
+         </div>
+      </div>
+      <!-- JavaScript Logic -->
+      <script>
+         // Constants
+         const NIVEIS = [
+             'Ensino Fundamental',
+             'Ensino Médio',
+             'Técnico',
+             'Graduação',
+             'Especialização',
+             'Mestrado ou Doutorado'
+         ];
+         
+         const RECURSOS = [
+             'Resumo em Áudio - Gere um podcast com IA baseado nas suas fontes',
+             'Resumo em Vídeo - Gere um vídeo explicativo, apresentado por IA',
+             'Cartões didáticos - Gere cartões didáticos com IA baseados nas suas fontes',
+             'Teste - Gere um teste interativo com IA baseado nas suas fontes',
+             'Infográfico - Gere um infográfico didático com IA baseado nas suas fontes',
+             'Apresentação de slides - Gere uma apresentação com IA baseada nas suas fontes',
+             'Relatório - Gere relatórios personalizados especificando a estrutura, o estilo, o tom e muito mais',
+             'Configuração das conversas - Gere uma configuração das conversas personalizadas, especificando o estilo e o tom da conversa com IA baseado nas suas fontes'
+         ];
+         
+         const NIVEL_CONFIG = {
+             'Ensino Fundamental': {
+                 complexidade: 'elementar',
+                 linguagem: 'simples e objetiva',
+                 detalhamento: 'conceitos básicos com muitos exemplos visuais'
+             },
+             'Ensino Médio': {
+                 complexidade: 'básica',
+                 linguagem: 'acessível e clara',
+                 detalhamento: 'conceitos fundamentais com exemplos práticos'
+             },
+             'Técnico': {
+                 complexidade: 'intermediária',
+                 linguagem: 'técnica mas didática',
+                 detalhamento: 'aplicações práticas e procedimentos'
+             },
+             'Graduação': {
+                 complexidade: 'acadêmica',
+                 linguagem: 'formal e técnica',
+                 detalhamento: 'teoria fundamentada e análise crítica'
+             },
+             'Especialização': {
+                 complexidade: 'avançada',
+                 linguagem: 'especializada',
+                 detalhamento: 'aprofundamento em áreas específicas'
+             },
+             'Mestrado ou Doutorado': {
+                 complexidade: 'científica avançada',
+                 linguagem: 'acadêmica especializada',
+                 detalhamento: 'pesquisa de ponta e metodologia rigorosa'
+             }
+         };
+         
+         // State
+         let currentStep = 0;
+         let responses = {
+             nivel: '',
+             curso: '',
+             tema: '',
+             recurso: ''
+         };
+         
+         // DOM Elements
+         const wizardCard = document.getElementById('wizard-card');
+         const resultView = document.getElementById('result-view');
+         const btnNext = document.getElementById('btn-next');
+         const btnBack = document.getElementById('btn-back');
+         const nextLabel = document.getElementById('next-label');
+         const stepCounter = document.getElementById('step-counter');
+         const progressBars = document.querySelectorAll('#progress-container div');
+         const inputCurso = document.getElementById('input-curso');
+         const inputTema = document.getElementById('input-tema');
+         
+         // Initialize Lucide Icons
+         function initIcons() {
+             lucide.createIcons();
+         }
+         
+         // State Management Functions
+         function updateUI() {
+             // Hide all steps
+             document.querySelectorAll('.step-view').forEach(s => s.classList.add('hidden'));
+             // Show current step
+             document.getElementById(`step-${currentStep}`).classList.remove('hidden');
+         
+             // Update Progress Bar
+             const colors = ['bg-blue-500', 'bg-red-500', 'bg-yellow-500', 'bg-green-500', 'bg-purple-500'];
+             progressBars.forEach((bar, idx) => {
+                 bar.classList.remove('bg-gray-200', ...colors);
+                 if (idx <= currentStep) {
+                     bar.classList.add(colors[idx]);
+                 } else {
+                     bar.classList.add('bg-gray-200');
+                 }
+             });
+         
+             stepCounter.innerText = `Etapa ${currentStep + 1} de 5`;
+         
+             // Button visibility
+             if (currentStep > 0) {
+                 btnBack.classList.remove('hidden');
+             } else {
+                 btnBack.classList.add('hidden');
+             }
+         
+             nextLabel.innerText = currentStep === 4 ? 'Gerar Configuração' : 'Continuar';
+         
+             validateStep();
+             initIcons();
+         }
+         
+         function validateStep() {
+             let isValid = false;
+             switch(currentStep) {
+                 case 0: isValid = true; break;
+                 case 1: isValid = responses.nivel !== ''; break;
+                 case 2: isValid = responses.curso.trim().length > 0; break;
+                 case 3: isValid = responses.tema.trim().length > 0; break;
+                 case 4: isValid = responses.recurso !== ''; break;
+             }
+         
+             if (isValid) {
+                 btnNext.disabled = false;
+                 btnNext.classList.remove('bg-gray-300', 'text-gray-500', 'cursor-not-allowed');
+                 btnNext.classList.add('bg-gradient-to-r', 'from-blue-500', 'to-blue-600', 'text-white');
+             } else {
+                 btnNext.disabled = true;
+                 btnNext.classList.add('bg-gray-300', 'text-gray-500', 'cursor-not-allowed');
+                 btnNext.classList.remove('bg-gradient-to-r', 'from-blue-500', 'to-blue-600', 'text-white');
+             }
+         }
+         
+         function selectNivel(val) {
+             responses.nivel = val;
+             renderNivelOptions();
+             validateStep();
+         }
+         
+         function selectRecurso(val) {
+             responses.recurso = val;
+             renderRecursoOptions();
+             validateStep();
+         }
+         
+         function renderNivelOptions() {
+             const container = document.getElementById('nivel-options');
+             container.innerHTML = NIVEIS.map((nivel, index) => {
+                 const isActive = responses.nivel === nivel;
+                 return `
+                     <button onclick="selectNivel('${nivel}')" class="p-5 rounded-xl border-2 text-left transition-all duration-300 font-medium shadow-sm hover:shadow-xl hover:-translate-y-1 ${
+                         isActive 
+                         ? 'border-blue-500 bg-blue-50 shadow-lg scale-105' 
+                         : 'border-gray-300 hover:border-blue-400 bg-white'
+                     }">
+                         <div class="flex items-center justify-between">
+                             <span class="font-bold text-gray-900 text-base">${index + 1}. ${nivel}</span>
+                             ${isActive ? '<i data-lucide="check-circle" class="text-blue-500 flex-shrink-0 w-5 h-5"></i>' : ''}
+                         </div>
+                     </button>
+                 `;
+             }).join('');
+             initIcons();
+         }
+         
+         function renderRecursoOptions() {
+             const container = document.getElementById('recurso-options');
+             container.innerHTML = RECURSOS.map((recurso, index) => {
+                 const isActive = responses.recurso === index.toString();
+                 const [title, desc] = recurso.split(' - ');
+                 return `
+                     <button onclick="selectRecurso('${index}')" class="p-5 rounded-xl border-2 text-left transition-all duration-300 shadow-sm hover:shadow-xl hover:-translate-y-1 ${
+                         isActive 
+                         ? 'border-green-500 bg-green-50 shadow-lg scale-105' 
+                         : 'border-gray-300 hover:border-green-400 bg-white'
+                     }">
+                         <div class="flex items-start justify-between gap-3">
+                             <div class="flex-1">
+                                 <span class="font-bold text-gray-900 block text-base mb-1">${index + 1}. ${title}</span>
+                                 <span class="text-xs text-gray-600 font-medium line-clamp-2">${desc}</span>
+                             </div>
+                             ${isActive ? '<i data-lucide="check-circle" class="text-green-500 flex-shrink-0 mt-1 w-5 h-5"></i>' : ''}
+                         </div>
+                     </button>
+                 `;
+             }).join('');
+             initIcons();
+         }
+         
+         function generatePrompt() {
+             const config = NIVEL_CONFIG[responses.nivel];
+             const recursoMap = ['análise detalhada em áudio (podcast)', 'vídeo explicativo', 'cartões didáticos', 'teste interativo', 'infográfico', 'apresentação de slides', 'relatório', 'conversa interativa'];
+             const recursoSelecionado = recursoMap[parseInt(responses.recurso)];
+         
+             return `Atue como um tutor acadêmico para um estudante de ${responses.curso}. Analise as fontes fornecidas sob a perspectiva da Inteligência Artificial, focando em ${responses.curso} e aplicações práticas.
+         
+         CONTEXTO DO ESTUDANTE:
+         - Nível de instrução: ${responses.nivel}
+         - Curso: ${responses.curso}
+         - Tema/Disciplina: ${responses.tema}
+         - Recurso solicitado: ${recursoSelecionado}
+         
+         DIRETRIZES DE LINGUAGEM E COMPLEXIDADE:
+         - Complexidade: ${config.complexidade}
+         - Linguagem: ${config.linguagem}
+         - Detalhamento: ${config.detalhamento}
+         
+         INSTRUÇÕES PARA GERAÇÃO DE CONTEÚDO:
+         
+         1. Analise profundamente todas as fontes fornecidas, identificando:
+         - Conceitos-chave e terminologia específica
+         - Relações entre diferentes tópicos
+         - Exemplos práticos e casos de uso
+         - Dados, estatísticas e evidências relevantes
+         
+         2. Estruture o conteúdo considerando:
+         - Progressão lógica do mais simples ao mais complexo
+         - Conexões entre teoria e prática
+         - Aplicabilidade ao contexto de ${responses.tema}
+         
+         3. Para o formato de ${recursoSelecionado}, utilize:
+         - Identifique dados e relações visuais nas fontes
+         - Sugira gráficos, diagramas e ícones apropriados
+         - Organize informações em hierarquia visual
+         - Use cores e elementos gráficos para categorização
+         
+         4. Adapte a profundidade do conteúdo para:
+         - Foque em conhecimento especializado
+         - Relacione com tendências atuais da área
+         - Inclua debates e controvérsias do campo
+         - Conecte teoria avançada com prática profissional
+         
+         5. Incorpore elementos pedagógicos:
+         - Explicações claras de termos técnicos
+         - Exemplos contextualizados ao ${responses.tema}
+         - Conexões com aplicações reais em ${responses.tema}
+         - Perguntas reflexivas para consolidação do aprendizado
+         
+         OBJETIVO FINAL:
+         Criar um ${recursoSelecionado} que maximize o aprendizado do estudante de ${responses.nivel} em ${responses.curso}, utilizando as fontes de forma abrangente e estruturada.`;
+         }
+         
+         function renderResult() {
+             const prompt = generatePrompt();
+             const recursoNome = RECURSOS[parseInt(responses.recurso)].split(' - ')[0];
+             const isChat = parseInt(responses.recurso) === 7;
+         
+             resultView.innerHTML = `
+                 <!-- Selection Summary -->
+                 <div class="bg-white p-6 rounded-2xl border-2 border-blue-500 shadow-lg">
+                     <h3 class="text-xl font-bold text-gray-900 mb-4 flex items-center gap-3">
+                         <i data-lucide="check-circle" class="text-green-500 w-7 h-7"></i>
+                         Configuração Personalizada
+                     </h3>
+                     <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm">
+                         <div class="bg-blue-50 p-4 rounded-xl">
+                             <p class="font-bold text-blue-600 mb-1">Nível:</p>
+                             <p class="text-gray-800">${responses.nivel}</p>
+                         </div>
+                         <div class="bg-red-50 p-4 rounded-xl">
+                             <p class="font-bold text-red-600 mb-1">Curso:</p>
+                             <p class="text-gray-800">${responses.curso}</p>
+                         </div>
+                         <div class="bg-yellow-50 p-4 rounded-xl">
+                             <p class="font-bold text-yellow-600 mb-1">Tema/Disciplina:</p>
+                             <p class="text-gray-800">${responses.tema}</p>
+                         </div>
+                         <div class="bg-green-50 p-4 rounded-xl">
+                             <p class="font-bold text-green-600 mb-1">Recurso:</p>
+                             <p class="text-gray-800">${recursoNome}</p>
+                         </div>
+                     </div>
+                 </div>
+         
+                 <!-- Config Instructions -->
+                 <div class="bg-white p-6 rounded-2xl border-2 border-blue-500 shadow-lg">
+                     <h3 class="text-lg font-bold text-gray-900 mb-4 flex items-center gap-3">
+                         <i data-lucide="sparkles" class="text-yellow-500 w-6 h-6"></i>
+                         Instruções de Configuração
+                     </h3>
+                     <div class="space-y-4 text-sm text-gray-700">
+                         <div class="bg-blue-50 p-4 rounded-xl border-l-4 border-blue-500">
+                             <p class="font-bold text-blue-600 mb-2">Passo 1: Prepare suas fontes</p>
+                             <ul class="list-disc list-inside space-y-1 ml-2">
+                                 <li>Acesse o NotebookLM em notebooklm.google.com</li>
+                                 <li>Crie um novo notebook ou abra um existente</li>
+                                 <li>Adicione suas fontes (PDFs, documentos, URLs, vídeos do YouTube)</li>
+                                 <li>Aguarde o processamento das fontes pela IA</li>
+                             </ul>
+                         </div>
+         
+                         <div class="bg-green-50 p-4 rounded-xl border-l-4 border-green-500">
+                             <p class="font-bold text-green-600 mb-2">Passo 2: Configure o recurso</p>
+                             <ul class="list-disc list-inside space-y-1 ml-2">
+                                 ${isChat ? `
+                                     <li>Abra a área de "Chat" no NotebookLM</li>
+                                     <li>Cole o prompt personalizado gerado abaixo</li>
+                                     <li>Inicie a conversa com suas dúvidas específicas</li>
+                                 ` : `
+                                     <li>Localize o botão "${recursoNome}" no painel de recursos</li>
+                                     <li>Clique para gerar o conteúdo automaticamente</li>
+                                     <li>Aguarde o processamento (pode levar alguns minutos)</li>
+                                     <li>Revise e personalize o conteúdo gerado conforme necessário</li>
+                                 `}
+                             </ul>
+                         </div>
+         
+                         <div class="bg-yellow-50 p-4 rounded-xl border-l-4 border-yellow-500">
+                             <p class="font-bold text-yellow-600 mb-2">Passo 3: Otimize o resultado</p>
+                             <ul class="list-disc list-inside space-y-1 ml-2">
+                                 <li>Use o prompt personalizado abaixo para guiar a IA</li>
+                                 <li>Refine as fontes adicionando materiais mais específicos se necessário</li>
+                                 <li>Experimente diferentes configurações para encontrar o melhor resultado</li>
+                             </ul>
+                         </div>
+                     </div>
+                 </div>
+         
+                 <!-- Prompt Output -->
+                 <div class="bg-white p-6 rounded-2xl border-2 border-red-500 shadow-lg">
+                     <h3 class="text-lg font-bold text-gray-900 mb-4 flex items-center gap-3">
+                         <i data-lucide="sparkles" class="text-red-500 w-6 h-6"></i>
+                         Prompt Otimizado para NotebookLM
+                     </h3>
+					
+                     <!-- AI Improvement Button 
+                     <button 
+                         id="btn-ai-improve"
+                         onclick="improvePromptWithAI()"
+                         class="w-full mb-4 py-3 px-6 rounded-xl font-bold text-white transition-all shadow-md text-base bg-gradient-to-r from-purple-500 to-indigo-600 hover:from-purple-600 hover:to-indigo-700 flex items-center justify-center gap-2">
+                         <i data-lucide="sparkles" class="w-5 h-5"></i>
+                         🤖 Aprimorar Prompt com IA
+                     </button>
+					 -->
+         
+                     <!-- Prompt Display Area -->
+                     <div class="bg-gray-50 p-4 rounded-xl border-2 border-gray-300 mb-4">
+                         <pre id="prompt-text" class="text-xs whitespace-pre-wrap font-mono text-gray-800 overflow-x-auto max-h-96 overflow-y-auto">${prompt}</pre>
+                     </div>
+         
+                     <!-- Copy Button -->
+                     <button id="btn-copy" onclick="copyPrompt()" class="w-full py-3 px-6 rounded-xl font-bold text-white transition-all shadow-md text-base bg-blue-500 hover:bg-blue-600">
+                         <span id="copy-text">📋 Copiar Prompt</span>
+                     </button>
+                 </div>
+         
+                 <!-- Tips -->
+                 <div class="bg-yellow-50 p-5 rounded-2xl border-2 border-yellow-400">
+                     <h4 class="font-bold text-yellow-700 mb-3 text-base flex items-center gap-2">
+                         💡 Dicas Avançadas
+                     </h4>
+                     <ul class="text-sm text-gray-700 space-y-2 list-disc list-inside">
+                         <li>Adicione múltiplas fontes complementares para enriquecer o conteúdo gerado</li>
+                         <li>Use a função "Fazer pergunta" para esclarecer conceitos específicos</li>
+                         <li>Combine diferentes recursos (ex: áudio + slides) para estudo multimodal</li>
+                         <li>Revise e valide as informações geradas consultando suas fontes originais</li>
+                     </ul>
+                 </div>
+         
+                 <!-- Result Actions -->
+                 <div class="flex gap-3">
+                     <button onclick="changeRecurso()" class="flex-1 bg-blue-500 text-white py-3 px-6 rounded-xl hover:bg-blue-600 transition-all font-bold shadow-md">
+                         ← Alterar Recurso
+                     </button>
+                     <button onclick="resetApp()" class="flex-1 bg-red-500 text-white py-3 px-6 rounded-xl hover:bg-red-600 transition-all font-bold shadow-md">
+                         🔄 Reiniciar
+                     </button>
+                 </div>
+             `;
+             initIcons();
+         }
+         
+         // Action Functions
+         function handleNext() {
+             if (currentStep < 4) {
+                 currentStep++;
+                 updateUI();
+             } else {
+                 showConfig();
+             }
+         }
+         
+         function handleBack() {
+             if (currentStep > 0) {
+                 currentStep--;
+                 updateUI();
+             }
+         }
+         
+         function showConfig() {
+             wizardCard.classList.add('hidden');
+             resultView.classList.remove('hidden');
+             renderResult();
+             window.scrollTo({ top: 0, behavior: 'smooth' });
+         }
+         
+         function changeRecurso() {
+             currentStep = 4;
+             wizardCard.classList.remove('hidden');
+             resultView.classList.add('hidden');
+             updateUI();
+             window.scrollTo({ top: 0, behavior: 'smooth' });
+         }
+         
+         function resetApp() {
+             currentStep = 0;
+             responses = { nivel: '', curso: '', tema: '', recurso: '' };
+             inputCurso.value = '';
+             inputTema.value = '';
+             wizardCard.classList.remove('hidden');
+             resultView.classList.add('hidden');
+             renderNivelOptions();
+             renderRecursoOptions();
+             updateUI();
+         window.scrollTo({ top: 0, behavior: 'smooth' });
+         }
+         
+         function copyPrompt() {
+         const text = document.getElementById('prompt-text').innerText;
+         navigator.clipboard.writeText(text).then(() => {
+         const btn = document.getElementById('btn-copy');
+         const label = document.getElementById('copy-text');
+         btn.classList.replace('bg-blue-500', 'bg-green-500');
+         btn.classList.replace('hover:bg-blue-600', 'hover:bg-green-600');
+         label.innerText = '✓ Prompt Copiado!';
+         setTimeout(() => {
+         btn.classList.replace('bg-green-500', 'bg-blue-500');
+         btn.classList.replace('hover:bg-green-600', 'hover:bg-blue-600');
+         label.innerText = '📋 Copiar Prompt';
+         }, 3000);
+         });
+         }
+         
+         // ============================================
+         // FUNÇÃO APRIMORAR PROMPT COM IA - COMPLETA
+         // ============================================
+         async function improvePromptWithAI() {
+         const promptOriginal = generatePrompt(); // Sempre pega o prompt base original
+         const btn = document.getElementById('btn-ai-improve');
+         const originalBtnHTML = btn.innerHTML;
+         
+         // Atualiza UI para estado de carregamento
+         btn.innerHTML = `
+         <div class="flex items-center justify-center gap-2">
+             <div class="animate-spin h-5 w-5 border-3 border-white border-t-transparent rounded-full"></div>
+             <span>Aprimorando com IA...</span>
+         </div>
+         `;
+         btn.disabled = true;
+         
+         try {
+         // Faz a chamada para a API do Claude
+         const response = await fetch("https://api.anthropic.com/v1/messages", {
+             method: "POST",
+             headers: {
+                 "Content-Type": "application/json",
+             },
+             body: JSON.stringify({
+                 model: "claude-sonnet-4-20250514",
+                 max_tokens: 4000,
+                 messages: [
+                     {
+                         role: "user",
+                         content: `Você é um especialista em Prompt Engineering e NotebookLM. Analise o seguinte prompt e aprimore-o significativamente para obter melhores resultados no NotebookLM.
+         
+         PROMPT ORIGINAL:
+         ${promptOriginal}
+         
+         TAREFA:
+         Aprimore este prompt seguindo as melhores práticas de Prompt Engineering:
+         
+         1. ESTRUTURA E CLAREZA:
+         - Organize melhor as seções com hierarquia clara
+         - Use marcadores e numeração eficiente
+         - Torne as instruções mais específicas e acionáveis
+         
+         2. CONTEXTO E ESPECIFICIDADE:
+         - Adicione detalhes relevantes sobre o nível acadêmico
+         - Inclua exemplos de tipos de análise esperados
+         - Especifique formatos de saída desejados
+         
+         3. INSTRUÇÕES TÉCNICAS:
+         - Adicione diretrizes para citação de fontes
+         - Inclua instruções sobre profundidade de análise
+         - Especifique critérios de qualidade
+         
+         4. OTIMIZAÇÃO PARA NOTEBOOKLM:
+         - Adapte linguagem para melhor interação com o NotebookLM
+         - Inclua instruções para explorar recursos específicos da ferramenta
+         - Adicione diretrizes para síntese e conexão de múltiplas fontes
+         
+         Retorne APENAS o prompt aprimorado, sem explicações adicionais. O prompt deve ser direto, prático e otimizado para uso imediato no NotebookLM.`
+                     }
+                 ],
+             })
+         });
+         
+         const data = await response.json();
+         
+         // Extrai o texto da resposta
+         const enhancedPrompt = data.content
+             .filter(item => item.type === "text")
+             .map(item => item.text)
+             .join("\n");
+         
+         // Atualiza o prompt exibido
+         document.getElementById('prompt-text').innerText = enhancedPrompt;
+         
+         // Feedback de sucesso
+         btn.innerHTML = '✨ Prompt Aprimorado com Sucesso!';
+         btn.classList.remove('from-purple-500', 'to-indigo-600');
+         btn.classList.add('from-green-500', 'to-green-600');
+         
+         setTimeout(() => {
+             btn.innerHTML = originalBtnHTML;
+             btn.classList.remove('from-green-500', 'to-green-600');
+             btn.classList.add('from-purple-500', 'to-indigo-600');
+             btn.disabled = false;
+             initIcons();
+         }, 3000);
+         
+         } catch (error) {
+         console.error('Erro ao aprimorar prompt:', error);
+         
+         // Feedback de erro
+         btn.innerHTML = '⚠️ Erro ao aprimorar - Tente novamente';
+         btn.classList.remove('from-purple-500', 'to-indigo-600');
+         btn.classList.add('from-red-500', 'to-red-600');
+         
+         setTimeout(() => {
+             btn.innerHTML = originalBtnHTML;
+             btn.classList.remove('from-red-500', 'to-red-600');
+             btn.classList.add('from-purple-500', 'to-indigo-600');
+             btn.disabled = false;
+             initIcons();
+         }, 3000);
+         }
+         }
+         
+         // Event Listeners
+         btnNext.addEventListener('click', handleNext);
+         btnBack.addEventListener('click', handleBack);
+         
+         inputCurso.addEventListener('input', (e) => {
+         responses.curso = e.target.value;
+         validateStep();
+         });
+         
+         inputTema.addEventListener('input', (e) => {
+         responses.tema = e.target.value;
+         validateStep();
+         });
+         
+         // Initialize App
+         renderNivelOptions();
+         renderRecursoOptions();
+         updateUI();
+         
+      </script>
+      <script type="module" src="/index.tsx"></script>
+   </body>
 </html>
